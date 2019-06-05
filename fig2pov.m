@@ -25,7 +25,7 @@ line_obj = findobj(hax, 'Type', 'line');   % all objects of type 'line'
 
 % Determine light properties if specified by axes, otherwise set default
 % light position equal to camera position
-light_obj =  findobj(hax, 'Type', 'Light');
+light_obj = findobj(hax, 'Type', 'Light');
 if isempty(light_obj)
     light_obj = struct('Position', campos, 'Color', [1 1 1], 'UserData', []);
 end
@@ -142,19 +142,12 @@ for i_p = 1:numel(patch_obj)
         drawAsCylinder(fid, pp)
         continue
     end
-    
-%     if isequal(pp.Parent.Type, 'hgtransform')
-%         ht = pp.Parent;
-%         vertices = [pp.Vertices ones(size(pp.Vertices,1),1)]*ht.Matrix(1:3,:)';
-%     else
-        vertices = pp.Vertices;
-%     end
 
     [num_faces, ~] = size(pp.Faces);
     fprintf(fid,'#declare faces_%d =\nunion {\n',i_p);
     for i_f=1:num_faces
         Nverts = sum(~isnan(pp.Faces(i_f,:)));
-        face_verts = vertices(pp.Faces(i_f, 1:Nverts), :);
+        face_verts = pp.Vertices(pp.Faces(i_f, 1:Nverts), :);
         if size(face_verts, 2) == 2
             face_verts = [face_verts(:,1) zeros(Nverts,1) face_verts(:,2)];
         else
@@ -221,10 +214,8 @@ for i_p = 1:numel(patch_obj)
         fprintf(fid,'\tmatrix <%10.6f, %10.6f, %10.6f,\n', ht.Matrix(1,1), ht.Matrix(1,3), ht.Matrix(1,2));
         fprintf(fid,'\t\t%10.6f, %10.6f, %10.6f,\n', ht.Matrix(3,1), ht.Matrix(3,3), ht.Matrix(3,2));
         fprintf(fid,'\t\t%10.6f, %10.6f, %10.6f,\n', ht.Matrix(2,1), ht.Matrix(2,3), ht.Matrix(2,2));
-        fprintf(fid,'\t\t%10.6f, %10.6f, %10.6f>\n', 0, 0, 0);
-    end
-    
-    
+        fprintf(fid,'\t\t%10.6f, %10.6f, %10.6f>\n', ht.Matrix(1,4), ht.Matrix(3,4), ht.Matrix(2,4));
+    end   
     
     fprintf(fid,'}\n\n');
     
