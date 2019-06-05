@@ -11,6 +11,10 @@ if nargin < 2
     pov_filename = 'fig.pov';
 end
 
+if nargin < 1
+	hax = gca;
+end
+
 % Open file for writing
 fid = fopen(pov_filename,'w');
 
@@ -21,7 +25,7 @@ line_obj = findobj(hax, 'Type', 'line');   % all objects of type 'line'
 
 % Determine light properties if specified by axes, otherwise set default
 % light position equal to camera position
-light_obj = findobj(hax, 'Type', 'Light');
+light_obj =  findobj(hax, 'Type', 'Light');
 if isempty(light_obj)
     light_obj = struct('Position', campos, 'Color', [1 1 1], 'UserData', []);
 end
