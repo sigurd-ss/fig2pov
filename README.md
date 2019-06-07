@@ -67,5 +67,6 @@ This gives:
 
 See the documentation for more details on the extra options that can be specified.
 
-## Axes with multiple graphics objects
-TBD
+## Multiple graphics objects
+If an axes object contains multiple graphics objects, all of them will be included in the Povray script.
+
