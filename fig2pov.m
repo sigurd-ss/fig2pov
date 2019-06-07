@@ -104,8 +104,8 @@ if isfield(axes_povray_options,'Plane')
         axes_povray_options.Plane(1), axes_povray_options.Plane(3), axes_povray_options.Plane(2), axes_povray_options.Plane(4));
     if isfield(axes_povray_options,'PlaneColor')
         if isnumeric(axes_povray_options.PlaneColor) && numel(axes_povray_options.PlaneColor)==3
-        fprintf(fid, '\tpigment {color rgb<%.2f, %.2f, %.2f>}\n', ...
-            axes_povray_options.PlaneColor(1), axes_povray_options.PlaneColor(2), axes_povray_options.PlaneColor(3));
+            fprintf(fid, '\tpigment {color rgb<%.2f, %.2f, %.2f>}\n', ...
+                axes_povray_options.PlaneColor(1), axes_povray_options.PlaneColor(2), axes_povray_options.PlaneColor(3));
         else
             fprintf(fid, '\tpigment {%s}\n', axes_povray_options.PlaneColor);
         end
