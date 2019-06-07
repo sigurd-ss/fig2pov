@@ -146,7 +146,7 @@ MarkerFaceColor
 MarkerTexture
 SmoothingOn
 MeshOn
-<<<<<<< HEAD
+
 
 
 
