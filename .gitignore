@@ -131,3 +131,4 @@ unfold_script.m
 unfold_test.m
 normalize2midsphere.m
 addFace.m
+*.pov

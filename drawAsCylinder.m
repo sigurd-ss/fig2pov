@@ -2,7 +2,7 @@ function drawAsCylinder(fid, pp)
 
 
 if isequal(pp.Type ,'surface')
-    vertices = [pp.XData(:) pp.YData(:) pp.ZData(:)];
+    vertices = unique([pp.XData(:) pp.YData(:) pp.ZData(:)], 'rows', 'stable');
 elseif isequal(pp.Type ,'patch')
     all_verts = pp.Faces(:);
     all_verts(isnan(all_verts)) = [];

@@ -47,10 +47,10 @@ fprintf(fid,'#include "textures.inc"\n');
 fprintf(fid,'#include "finish.inc"\n\n');
 
 % Declarations, if any are present in the povray options specified for axes object
-if isfield(axes_povray_options, 'define')
-    defnames = fieldnames(axes_povray_options.define);
+if isfield(axes_povray_options, 'Define')
+    defnames = fieldnames(axes_povray_options.Define);
     for i_def=1:numel(defnames)
-        defstr = split(axes_povray_options.define.(defnames{i_def}), newline);
+        defstr = split(axes_povray_options.Define.(defnames{i_def}), newline);
         fprintf(fid,'#declare %s = \n', defnames{i_def});
         for i_p=1:numel(defstr)
             fprintf(fid,'%s\n', defstr{i_p});
@@ -451,6 +451,11 @@ end
 % Loop over Line objects
 for i_l = 1:numel(line_obj)
     pp = line_obj(i_l);
+    if isempty(pp.ZData)
+        zdata = zeros(size(pp.XData));
+    else
+        zdata = pp.ZData;
+    end
     if isfield(pp.('UserData'),'povray')
         povray_options = pp.('UserData').('povray');
     else
@@ -474,8 +479,8 @@ for i_l = 1:numel(line_obj)
     if smoothing_on
         fprintf(fid,'\tcubic_spline\n');
         fprintf(fid,'\t%d,\n',Npts+2);
-        pt1 = [ pp.XData(1), pp.ZData(1), pp.YData(1)];
-        pt2 = [ pp.XData(2), pp.ZData(2), pp.YData(2)];
+        pt1 = [ pp.XData(1), zdata(1), pp.YData(1)];
+        pt2 = [ pp.XData(2), zdata(2), pp.YData(2)];
         pt0 = pt1 + 0.1*(pt1-pt2)/norm(pt1-pt2);
         fprintf(fid,'\t<%10.6f, %10.6f, %10.6f>, %d\n', ...
             pt0(1), pt0(3), pt0(2), width);
@@ -485,11 +490,11 @@ for i_l = 1:numel(line_obj)
     end
     for i_p=1:Npts
         fprintf(fid,'\t<%10.6f, %10.6f, %10.6f>, %d\n', ...
-            pp.XData(i_p), pp.ZData(i_p), pp.YData(i_p), width);
+            pp.XData(i_p), zdata(i_p), pp.YData(i_p), width);
     end
     if smoothing_on
-        pt1 = [ pp.XData(end-1), pp.ZData(end-1), pp.YData(end-1)];
-        pt2 = [ pp.XData(end), pp.ZData(end), pp.YData(end)];
+        pt1 = [ pp.XData(end-1), zdata(end-1), pp.YData(end-1)];
+        pt2 = [ pp.XData(end), zdata(end), pp.YData(end)];
         pt0 = pt2 + 0.1*(pt2-pt1)/norm(pt2-pt1);
         fprintf(fid,'\t<%10.6f, %10.6f, %10.6f>, %d\n', ...
             pt0(1), pt0(3), pt0(2), width);
