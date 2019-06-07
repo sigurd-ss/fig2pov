@@ -139,6 +139,13 @@ drawAsSphere
 drawAsCylinder
 FaceColor
 FaceAlpha
+drawEdges
+EdgeColor
+EdgeTexture
+MarkerFaceColor
+MarkerTexture
+SmoothingOn
+MeshOn
 
 
 
