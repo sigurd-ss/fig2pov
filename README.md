@@ -39,7 +39,7 @@ povray cube.pov
 ```
 In this case, the script will result in the following figure:
 
-![povray cube 1](cube_povray1.png)
+![povray cube 1](cube_povray1.png =100x)
 
 ## Other graphics objects
 In the first example, the only graphics object in the axes was a patch object. fig2pov will convert all graphics objects, including surfaces, lights and lines. If an axes object contains multiple objcets, all of them will be included in the generated Povray script.
@@ -51,7 +51,7 @@ Povray is a ray-tracing program. As such, it has no concept of "lines". Instead,
 ### Mix of objects
 
 ## Using Povray options
-In addition to a straightforward conversion from the MATLAB figure to a ray-traced image, it is possible to specify additional properties and options for the graphics objects. This will enable rendering options that are not natively suported in MATLAB itself, such as adding etxture to patch objects, shadowing, ... 
+In addition to a straightforward conversion from the MATLAB figure to a ray-traced image, it is possible to specify additional properties and options for the graphics objects. This will enable rendering options that are not natively suported in MATLAB itself, such as adding texture to patch objects, shadowing, ... 
 
 Each graphics object in MATLAB has a property/field call 'UserData'. This field has no predefined structure and can be used to add data of any kind to the object. Note that each object (inclduing figures and axes) has its own 'UserData'. To provide povray-specific instructions for a graphics object, add a field 'povray' to UserData. UserData.povray is interpreted as a structure and its fields specify additional rendering instructions.
 Some examples are given below.
@@ -71,7 +71,7 @@ Adding texture using povray is done by adding the proper instructions to cube.Us
 cube.UserData.povray.Texture = 'T_Stone21';
 ``` 
 'T_Stone21' is one of the many texture recognized by Povray. A full list can be found in xxxx, including stone, wood, metal, glass, ... finishes.
-Once the structure 'povray' with field 'TexTure' is added to cube, fig2pov can be called to generate the povray script:
+Once the structure 'povray' with field 'Texture' is added to cube, fig2pov can be called to generate the povray script:
 ```
 fig2pov(gca, 'cube.pov')
 ```
