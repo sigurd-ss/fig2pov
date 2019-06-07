@@ -48,9 +48,7 @@ fall_test.m
 findnormal.m
 findOpenEdge.m
 findPlanesContainingVertex.m
-fit_cylinder.m
 fit_cylinder_edges.m
-fit_sphere.m
 hemi_test.m
 ico_stellation_diagram.m
 innersphere.m
