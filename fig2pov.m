@@ -1,7 +1,7 @@
 function fig2pov(hax, pov_filename)
 % Convert axes object to povray script that regenerates the content of the
-% axes in Povray. Additional Povray options can be specificed in the UserData
-% field of various objects.
+% axes in Povray. Additional Povray options (such as texture, ...)can be 
+% specificed in the UserData field of various objects.
 %
 % Input
 %   - hax: handle of axes object
