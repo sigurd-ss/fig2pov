@@ -31,7 +31,7 @@ h_axes = gca;
 ```
 The code above will result in the following figure:
 
-<img src="cube.png" width="500">
+<img src="./Figures/cube.png" width="500">
 
 Next, call fig2pov to convert this figure into a Povray script: 
 ```
@@ -43,7 +43,7 @@ povray cube.pov
 ```
 In this case, the script will result in the following figure:
 
-<img src="cube_povray1.png" width="500">
+<img src="./Figures/cube_povray1.png" width="500">
 
 ## Adding texture and other elements
 The appearance of the graphics objects can be further changed by adding a structure named 'povray' to the UserData of that object.
@@ -53,7 +53,7 @@ cube.UserData.povray.Texture = 'T_Stone21';
 ``` 
 This gives:
 
-<img src="cube_povray_texture1.png" width="500">
+<img src="./Figures/cube_povray_texture1.png" width="500">
 
 Or combinations with multiple options:
 ```
@@ -63,7 +63,7 @@ h_axes.UserData.povray.PlaneColor = 'checker color Black, color White';
 ``` 
 This gives:
 
-<img src="cube_povray_texture2.png" width="500">
+<img src="./Figures/cube_povray_texture2.png" width="500">
 
 See the documentation for more details on the extra options that can be specified.
 
@@ -90,6 +90,6 @@ h_axes.UserData.povray.Plane = [0 0 1 -4];
 
 This gives the following figure after rendering in Povray:
 
-<img src="multiple.png" width="700">
+<img src="./Figures/multiple.png" width="700">
 
 
