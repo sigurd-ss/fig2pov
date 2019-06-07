@@ -7,3 +7,4 @@ pp=patch('Vertices',[0 0 0; 0 0 1; 0 1 0; 0 1 1; 1 0 0; 1 0 1; 1 1 0; 1 1 1], ..
 view(3)
 axis equal
 ```
+![matlab cube](cube.tif)
