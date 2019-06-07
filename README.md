@@ -6,7 +6,7 @@ This function provides a simple way to convert MATLAB figures (or, to be exact, 
 ## Usage
 After you've generated an axes object with all the graphics elements you want, this figure can be converted to a Povray script by simply calling:
 ```
-fig2pov(_h\_axes_, _script\_name_)
+fig2pov(h_axes, script_name)
 ```
 With:
 - _h\_axes_ the handle to the axes object you want to convert (use gca for most recent axes)
@@ -27,7 +27,7 @@ axis equal
 ```
 The code above will result in the following figure:
 
-![matlab cube](cube.png)
+<img src="cube.png" width="500" title="hover text">
 
 Next, call fig2pov to convert this figure into a Povray script: 
 ```
@@ -39,7 +39,7 @@ povray cube.pov
 ```
 In this case, the script will result in the following figure:
 
-![povray cube 1](cube_povray1.png =100x)
+<img src="cube_povray1.png" width="500" title="hover text">
 
 ## Other graphics objects
 In the first example, the only graphics object in the axes was a patch object. fig2pov will convert all graphics objects, including surfaces, lights and lines. If an axes object contains multiple objcets, all of them will be included in the generated Povray script.
@@ -76,7 +76,8 @@ Once the structure 'povray' with field 'Texture' is added to cube, fig2pov can b
 fig2pov(gca, 'cube.pov')
 ```
 Executing 'cube.pov' in Povray gives the following figure:
-![povray cube 1](cube_povray_texture1.png)
+
+<img src="cube_povray_texture1.png" width="500" title="hover text">
 
 ### Adding background
 By default, the color of the background will be the same as the color used for the axes object.
