@@ -147,14 +147,3 @@ MarkerTexture
 SmoothingOn
 MeshOn
 
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 790b15dcbe53a007353765726243643af61a926b
