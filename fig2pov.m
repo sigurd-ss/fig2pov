@@ -252,7 +252,7 @@ for i_p = 1:numel(patch_obj)
             fprintf(fid,'\tpigment { %s }\n', edge_col);
         end
         if isfield(povray_options, 'EdgeTexture')
-            fprintf(fid,'\ttexture { %s }\n', povray_options.LineTexture);
+            fprintf(fid,'\ttexture { %s }\n', povray_options.EdgeTexture);
         end
         fprintf(fid,'}\n\n');
     end
@@ -354,7 +354,8 @@ for i_p = 1:numel(surf_obj)
         fprintf(fid,'\t}\n\n');
     end
     
-    if isequal(pp.FaceColor, 'flat') || isequal(pp.FaceColor, 'interp')
+    if (isequal(pp.FaceColor, 'flat') || isequal(pp.FaceColor, 'interp')) && ...
+            ~isfield(povray_options, 'Texture')
         colmap = colormap;
         col_range = [min(pp.CData(:)) max(pp.CData(:))];
         fprintf(fid,'\ttexture_list {\n');
@@ -371,11 +372,11 @@ for i_p = 1:numel(surf_obj)
     for i_f=1:N_faces
         fprintf(fid,'\t\t<%d, %d, %d>', ...
             hh.Faces(i_f, 1)-1, hh.Faces(i_f, 3)-1, hh.Faces(i_f, 2)-1);
-        if isequal(pp.FaceColor, 'flat')
+        if isequal(pp.FaceColor, 'flat') && ~isfield(povray_options, 'Texture')
             min_z = min(hh.Vertices(hh.Faces(i_f,:),3));
             col_ind = round((min_z-col_range(1))/diff(col_range)*63);
             fprintf(fid,', %d',col_ind);
-        elseif isequal(pp.FaceColor, 'interp')
+        elseif isequal(pp.FaceColor, 'interp') && ~isfield(povray_options, 'Texture')
             col_ind = nan(1,3);
             for i_v=1:3
                 z = hh.Vertices(hh.Faces(i_f,i_v),3);
