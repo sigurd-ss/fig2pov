@@ -70,3 +70,26 @@ See the documentation for more details on the extra options that can be specifie
 ## Multiple graphics objects
 If an axes object contains multiple graphics objects, all of them will be included in the Povray script.
 
+For example, five randomly placed sphere with different radii:
+```
+figure
+hold on
+[x,y,z] = sphere;
+for i=1:5
+    rand_pos = randi([-2 2], 1, 3);
+    rand_scale = 0.5*rand + 1;
+    h_sphere(i)=surf(rand_scale*x+rand_pos(1),rand_scale*y+rand_pos(2),rand_scale*z+rand_pos(3));
+    h_sphere(i).UserData.povray.drawAsSphere = true;
+    h_sphere(i).UserData.povray.Texture = sprintf('T_Stone%d', randi([1,44],1,1));
+end
+view(3)
+axis equal
+h_axes = gca;
+h_axes.UserData.povray.Plane = [0 0 1 -4];
+```
+
+This gives the following figure after rendering in Povray:
+
+<img src="multiple.png" width="700">
+
+
