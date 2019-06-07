@@ -7,4 +7,16 @@ pp=patch('Vertices',[0 0 0; 0 0 1; 0 1 0; 0 1 1; 1 0 0; 1 0 1; 1 1 0; 1 1 1], ..
 view(3)
 axis equal
 ```
+MATLAB will create the following figure:
+
 ![matlab cube](cube.png)
+
+Next, call fig2pov to convert this figure into a Povray script (\*.pov extension) and execute the script by calling Povray:
+```
+fig2pov(gca, 'cube.pov')
+
+povray cube.pov
+```
+As a result, Povray will generate the following figure:
+
+![povray cube 1](cube_povray1.png)
