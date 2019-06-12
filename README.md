@@ -3,7 +3,7 @@
 Convert MATLAB figures to ray-traced images using Povray as the rendering engine. If desired, add texture and other rendering elements not supported by MATLAB to your graphics objects.
 
 ## Introduction
-MATLAB graphics uses openGL (or ...) for rendering. The quality of the rendering is not as good as what can be provided by e.g ray tracing. Povray is a popular open-source ray tracing program with its own scripting language for describing scenes.
+MATLAB graphics uses openGL or Painters for rendering figures. The quality of the rendering is not as good as what can be provided by e.g ray tracing. Povray is a popular open-source ray tracing program with its own scripting language for describing scenes.
 This function provides a simple way to convert MATLAB figures (or, to be exact, axes) to images rendered using ray tracing. It does so by generating a povray script based on the contents of the axes object. This script can then be executed in Povray to generate the final image.
 
 ## Usage
@@ -69,7 +69,7 @@ This gives:
 
 <img src="./Figures/cube_povray_texture2.png" width="500">
 
-See the documentation for more details on the extra options that can be specified.
+See the documentation (./Documents/fig2pov documentation.docx) for more details on the extra options that can be specified.
 
 ## Multiple graphics objects
 If an axes object contains multiple graphics objects, all of them will be included in the Povray script.
