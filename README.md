@@ -1,10 +1,10 @@
 # fig2pov: Convert MATLAB figure to Povray script
 ## Summary
-Convert MATLAB figures to ray-traced images using Povray as the rendering engine. If desired, add texture and other rendering elements not supported by MATLAB.
+Convert MATLAB figures to ray-traced images using Povray as the rendering engine. If desired, add texture and other rendering elements not supported by MATLAB to your graphics objects.
 
 ## Introduction
 MATLAB graphics uses openGL (or ...) for rendering. The quality of the rendering is not as good as what can be provided by e.g ray tracing. Povray is a popular open-source ray tracing program with its own scripting language for describing scenes.
-This function provides a simple way to convert MATLAB figures (or, to be exact, axes) to images rendered using ray tracing. It does so by generating a povray script based on the contents of the axes object. This script can then be executed in Povray to gemerate the image.
+This function provides a simple way to convert MATLAB figures (or, to be exact, axes) to images rendered using ray tracing. It does so by generating a povray script based on the contents of the axes object. This script can then be executed in Povray to generate the final image.
 
 ## Usage
 After you've generated an axes object with all the graphics elements you want, this figure can be converted to a Povray script by simply calling:
@@ -17,10 +17,12 @@ With:
 
 If no arguments are provided, the default values are _h\_axes_ = gca and _script\_name_ = 'fig.pov'.
 
-To see the rendered version, you will have to execute this script in Povray. The program is free and can be downloaded here: xxxxxxxxxxx
+To see the rendered version, you will have to execute this script in Povray. The program is free and can be downloaded here: 
+https://www.povray.org/download/
+
 
 ## A first example
-Consider a red cube, drawn using MATLAB graphics objects:
+Consider a red cube, drawn using the MATLAB patch object:
 ```
 cube = patch('Vertices',[0 0 0; 0 0 1; 0 1 0; 0 1 1; 1 0 0; 1 0 1; 1 1 0; 1 1 1], ...
 	 'Faces',[1 2 4 3; 5 6 8 7; 1 2 6 5; 3 4 8 7; 1 3 7 5; 2 4 8 6], ...
@@ -46,16 +48,18 @@ In this case, the script will result in the following figure:
 <img src="./Figures/cube_povray1.png" width="500">
 
 ## Adding texture and other elements
-The appearance of the graphics objects can be further changed by adding a structure named 'povray' to the UserData of that object.
-For instance:
+The appearance a graphics object can be further changed by adding a structure named 'povray' to the UserData of that object.
+For instance, with 'cube' being the handle of the patch created earlier:
 ```
 cube.UserData.povray.Texture = 'T_Stone21';
 ``` 
-This gives:
+When calling fig2pov, the same cube will now be rendered with a texture named 'T_Stone21', giving the following figure:
 
 <img src="./Figures/cube_povray_texture1.png" width="500">
 
-Or combinations with multiple options:
+See [here](./Documents) for available textures.
+
+Each graphics object can have its own 'UserData.povray' structure:
 ```
 cube.UserData.povray.Texture = 'T_Wood1';
 h_axes.UserData.povray.Plane = [0 0 1 -5];
@@ -70,7 +74,7 @@ See the documentation for more details on the extra options that can be specifie
 ## Multiple graphics objects
 If an axes object contains multiple graphics objects, all of them will be included in the Povray script.
 
-For example, five randomly placed sphere with different radii:
+For example, five randomly placed spheres with different radii and randomly selected textures:
 ```
 figure
 hold on
