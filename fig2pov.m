@@ -109,6 +109,8 @@ if isfield(axes_povray_options,'Plane')
         else
             fprintf(fid, '\tpigment {%s}\n', axes_povray_options.PlaneColor);
         end
+    else
+        fprintf(fid, '\tpigment {%s}\n', 'checker color Black, color White');
     end
     if isfield(axes_povray_options,'PlaneTexture')
         fprintf(fid, '\ttexture { %s }\n', ...
