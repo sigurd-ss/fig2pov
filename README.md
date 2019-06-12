@@ -53,11 +53,11 @@ For instance, with 'cube' being the handle of the patch created earlier:
 ```
 cube.UserData.povray.Texture = 'T_Stone21';
 ``` 
-The same cube will now be rendered with a texture named 'T_Stone21', giving the following figure:
-
+When calling fig2pov, the same cube will now be rendered with a texture named 'T_Stone21', giving the following figure:
 
 <img src="./Figures/cube_povray_texture1.png" width="500">
 
+See [here](./Documents) for available textures.
 
 Each graphics object can have its own 'UserData.povray' structure:
 ```
@@ -69,14 +69,12 @@ This gives:
 
 <img src="./Figures/cube_povray_texture2.png" width="500">
 
-See [here](./Documents) for available textures.
-
 See the documentation for more details on the extra options that can be specified.
 
 ## Multiple graphics objects
 If an axes object contains multiple graphics objects, all of them will be included in the Povray script.
 
-For example, five randomly placed sphere with different radii and randomly selected textures:
+For example, five randomly placed spheres with different radii and randomly selected textures:
 ```
 figure
 hold on
