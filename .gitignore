@@ -8,7 +8,6 @@ arch12_snubcube.m
 arch13_snubdodecahedron.m
 arch1_truncatedtetrahedron.m
 arch2_truncatedcube.m
-alignVectors.m
 arch3_truncatedoctahedron.m
 arch4_truncateddodecahedron.m
 arch5_truncatedicosahedron.m
