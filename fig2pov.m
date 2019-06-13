@@ -59,6 +59,12 @@ if isfield(axes_povray_options, 'Define')
     end
 end
 
+if isfield(axes_povray_options, 'Zoom')
+    zoom_factor = axes_povray_options.Zoom;
+else
+    zoom_factor = 1;
+end
+
 % Camera properties
 cam_angle = hax.CameraViewAngle*1.05;   % 5% extra margin
 if dot(campos-camtarget, [1 1 0]) <= eps    % special handling needed for 2D view
@@ -67,7 +73,7 @@ else
     camoffset = 0;
 end
 fprintf(fid,'camera {\n');
-fprintf(fid,'\tlocation <%.4f, %.4f, %.4f>\n', hax.CameraPosition(1) + camoffset, hax.CameraPosition(3), hax.CameraPosition(2));
+fprintf(fid,'\tlocation <%.4f, %.4f, %.4f>\n', (hax.CameraPosition(1) + camoffset)/zoom_factor, hax.CameraPosition(3)/zoom_factor, hax.CameraPosition(2)/zoom_factor);
 fprintf(fid, '\tup     y\n');
 fprintf(fid, '\tright     x*image_width/image_height\n');
 fprintf(fid, '\tangle degrees(2*atan2(image_width/image_height * tan(%.4f), 1))\n', deg2rad(cam_angle/2));
