@@ -193,11 +193,7 @@ for i_p = 1:numel(patch_obj)
         else
             obj_color = pp.FaceColor;
         end
-        if isfield(povray_options, 'FaceAlpha')
-            obj_alpha = povray_options.FaceAlpha;
-        else
-            obj_alpha = pp.FaceAlpha;
-        end
+        obj_alpha = pp.FaceAlpha;
         fprintf(fid,'\tpigment { color rgbt <%4.3f, %4.3f, %4.3f, %4.3f> }\n',obj_color(1), obj_color(2), obj_color(3), 1-obj_alpha);
     end
     fprintf(fid,'\tfinish { ambient %.2f  diffuse %.2f specular %.2f}\n', pp.AmbientStrength, pp.DiffuseStrength, pp.SpecularStrength);
@@ -271,9 +267,7 @@ for i_p = 1:numel(patch_obj)
 
         vert_radius = pp.MarkerSize  * line_basewidth;
         
-        if isfield(povray_options, 'MarkerFaceColor')
-            vert_col = povray_options.('MarkerFaceColor');
-        elseif isequal(pp.MarkerEdgeColor, 'auto')
+        if isequal(pp.MarkerEdgeColor, 'auto')
             vert_col = pp.EdgeColor;
         else
             vert_col = pp.MarkerFaceColor;
@@ -413,8 +407,8 @@ for i_p = 1:numel(surf_obj)
     fprintf(fid,'}\n\n');
     
     if isfield(povray_options, 'MeshOn') && povray_options.MeshOn        
-        linecolor = [0 0 0];
-        meshwidth = 0.02;
+        linecolor = pp.EdgeColor;
+        meshwidth = pp.LineWidth * line_basewidth;
         
         [Nx, Ny] = size(pp.XData);
         xx = pp.XData(1,:);
@@ -511,9 +505,14 @@ for i_l = 1:numel(line_obj)
     fprintf(fid,'\ttolerance 0.001\n');
     fprintf(fid,'\tpigment{rgb <%10.6f, %10.6f, %10.6f>}\n', ...
         linecolor(1), linecolor(2), linecolor(3));
+    
     if isfield(povray_options, 'Texture')
-        fprintf(fid,'\ttexture { %s }\n', povray_options.Texture);
-    end   
+        fprintf(fid,'\ttexture { %s ', povray_options.Texture);
+        if isfield(povray_options, 'TextureScale')
+            fprintf(fid,'\n\tscale %d ', povray_options.TextureScale);
+        end
+        fprintf(fid,'}\n');
+    end 
     fprintf(fid,'}\n\n');
 end
 
