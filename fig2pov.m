@@ -122,6 +122,10 @@ if isfield(axes_povray_options,'Plane')
         fprintf(fid, '\ttexture { %s }\n', ...
             axes_povray_options.PlaneTexture);
     end
+    if isfield(axes_povray_options,'PlaneTextureScale')
+        fprintf(fid, '\tscale %d\n', ...
+            axes_povray_options.PlaneTextureScale);
+    end
     
     fprintf(fid,'}\n\n');
 else
@@ -405,11 +409,20 @@ for i_p = 1:numel(surf_obj)
         fprintf(fid,'\tpigment{rgb <%10.6f, %10.6f, %10.6f>}\n', ...
             facecolor(1), facecolor(2), facecolor(3));
     end
+    
     if isfield(povray_options, 'Texture')
-        fprintf(fid,'\ttexture { %s }\n', povray_options.Texture);
+        fprintf(fid,'\ttexture { %s ', povray_options.Texture);
+        if isfield(povray_options, 'TextureScale')
+            fprintf(fid,'\n\tscale %d ', povray_options.TextureScale);
+        end
+        fprintf(fid,'}\n');
     end
     if isfield(povray_options, 'InteriorTexture')
-        fprintf(fid,'\tinterior_texture  { %s }\n', povray_options.InteriorTexture);
+        fprintf(fid,'\tinterior_texture { %s ', povray_options.InteriorTexture);
+        if isfield(povray_options, 'TextureScale')
+            fprintf(fid,'\n\tscale %d ', povray_options.TextureScale);
+        end
+        fprintf(fid,'}\n');
     end
     fprintf(fid,'}\n\n');
     
