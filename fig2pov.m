@@ -298,6 +298,13 @@ end
 % Loop over Surface objects
 for i_p = 1:numel(surf_obj)
     pp = surf_obj(i_p);
+    [Ny, Nx] = size(pp.ZData);
+    if numel(pp.XData) == Nx
+        pp.XData = ones(Ny,1) * pp.XData(:)';
+    end
+    if numel(pp.YData) == Ny
+        pp.YData = pp.YData(:) * ones(1, Nx);
+    end
     if isfield(pp.('UserData'),'povray')
         povray_options = pp.('UserData').('povray');
     else
