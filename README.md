@@ -1,3 +1,5 @@
+<p align="center"> <img src="./Figures/matlab_logo.png" width="400"> </p>
+
 # fig2pov: Convert MATLAB figure to Povray script
 ## Summary
 Convert MATLAB figures to ray-traced images using Povray as the rendering engine. If desired, add texture and other rendering elements not supported by MATLAB to your graphics objects.
