@@ -98,4 +98,5 @@ This gives the following figure after rendering in Povray:
 
 <p align="center"> <img src="./Figures/multiple.png" width="700"> </p>
 
-
+## Note
+These functions were initially written to facilitate the generation of pictures of polyhedra (using mostly patch objects). Since then, I've tried to include other types of graphics objects as well. Let me know if something is missing or you find bugs.
