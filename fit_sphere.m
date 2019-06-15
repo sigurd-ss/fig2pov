@@ -1,11 +1,21 @@
 function [x0, y0, z0, r] = fit_sphere(data)
-% Fit a set of data points to a sphere
-% 
-% See e.g. https://jekel.me/2015/Least-Squares-Sphere-Fit/ for a
-% description of the algorithm
+% [x0, y0, z0, r] = fit_sphere(data)
+%
+% Fit a set of data points to a sphere. This is essentially an LMS
+% approximation to find the parameters of the sphere. See  e.g.
+% https://jekel.me/2015/Least-Squares-Sphere-Fit/ for a description of the
+% algorithm. 
 %
 % Input:
 %   data: Nx3 matrix of N (3D) data points
+% 
+% Otuput:
+%   - x0: x-coordinate of the center of the best-fit sphere
+%   - y0: y-coordinate of the center of the best-fit sphere
+%   - z0: z-coordinate of the center of the best-fit sphere
+%   - r: radius of the best-fit sphere
+%
+% Author: Sigurd Schelstraete, 2019
 
 [Npts, dim] = size(data);
 if dim ~=3

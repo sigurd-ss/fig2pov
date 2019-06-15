@@ -1,4 +1,6 @@
 function fig2pov(hax, pov_filename)
+% fig2pov(hax, pov_filename)
+%
 % Convert axes object to povray script that regenerates the content of the
 % axes in Povray. Additional Povray options (such as texture, ...)can be 
 % specificed in the UserData field of various objects.
@@ -6,6 +8,8 @@ function fig2pov(hax, pov_filename)
 % Input
 %   - hax: handle of axes object
 %   - pov_filename to write povray script to
+%
+% Author: Sigurd Schelstraete, 2019
 
 if nargin < 2
     pov_filename = 'fig.pov';

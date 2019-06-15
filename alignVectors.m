@@ -1,12 +1,21 @@
 function rmat = alignVectors(avec, bvec)
-% Find a rotation matrix such that avec aligns with bvec, i.e:
-% rmat*avec(:) is parallel to bvec.
+% rmat = alignVectors(avec, bvec)
+% 
+% Find a rotation matrix such that the vector 'avec' aligns with the vector
+% 'bvec', i.e: rmat*avec(:) is parallel to bvec. 
+%
+% Input:
+%   - avec: vector (3x1 or 1x3)
+%   - bvec: vector (3x1 or 1x3)
+% 
+% Output:
+%   - rmat: rotation matrix such that rmat*avec(:) is parallel to bvec(:)
+%
+% Author: Sigurd Schelstraete, 2019
 
 vec_c = cross(avec/norm(avec), bvec/norm(bvec));
 
 if isequal(round(vec_c,10),zeros(size(vec_c)))
-%    rmat = diag(bvec/norm(bvec)./avec*norm(avec));
-%    rmat(isnan(rmat)) = 1;
    rmat = eye(length(vec_c)) * dot(avec,bvec)/norm(avec)/norm(bvec);
    return
 end

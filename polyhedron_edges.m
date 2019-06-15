@@ -1,4 +1,17 @@
 function pp_out = polyhedron_edges(pp_in, varargin)
+% pp_out = polyhedron_edges(pp_in, varargin)
+%
+% Given a patch object, specified as a set of Vertices and Faces, find all
+% the edges that are present in the object.
+%
+% Input:
+%   - pp_in: patch object (or any object that has fields 'Faces' and 'Vertices')
+%   - varargin: optional arguments as name, value pairs
+%
+% Output:
+%   - pp_out: structure with fields 'Edges' and 'Vertices'
+%
+% Author: Sigurd Schelstraete, 2019
 
 options.sorted = true;
 

@@ -1,5 +1,16 @@
 function drawAsCylinder(fid, pp)
-
+% drawAsCylinder(fid, pp)
+%
+% Approximate a patch or surface object as a cylinder (in the general
+% sense, i.e. an object obtained by rotating a 2D curve around a rotation
+% axis). Determine the relevant parameters (symmetry axis and shape) and
+% write the resulting shape to file using the Povray scripting language.
+%
+% Input:
+%   - fid: File identifier
+%   - pp: graphics object (path or surface)
+%
+% Author: Sigurd Schelstraete, 2019
 
 if isequal(pp.Type ,'surface')
     vertices = unique([pp.XData(:) pp.YData(:) pp.ZData(:)], 'rows', 'stable');
@@ -7,6 +18,13 @@ elseif isequal(pp.Type ,'patch')
     all_verts = pp.Faces(:);
     all_verts(isnan(all_verts)) = [];
     vertices = pp.Vertices(all_verts,:);
+else
+    error('Object type not supported')
+end
+
+if isequal(pp.Parent.Type, 'hgtransform')
+    ht = pp.Parent;
+    vertices = vertices*ht.Matrix(1:3,:)';
 end
 
 if isfield(pp.('UserData'),'povray')
@@ -21,6 +39,7 @@ else
     facecolor = pp.FaceColor;
 end
 
+% Fit data to cylinder
 [rot_curve, centr_axis, center] = fit_cylinder(vertices);
 Npts = size(rot_curve,1);
 if Npts >=3
@@ -56,14 +75,11 @@ else    % quadratic or more -> lathe
 end
 face_color = pp.FaceColor;
 fprintf(fid,'\tpigment { color rgbt <%4.3f, %4.3f, %4.3f, %4.3f> }\n',face_color(1), face_color(2), face_color(3), 0);
-% TODO: add rotation/translation if needed
+
 rmat = alignVectors(centr_axis([1 3 2]), [0 1 0]);
 fprintf(fid,'\t\tmatrix <%10.6f, %10.6f, %10.6f,\n', rmat(1,1), rmat(1,2), rmat(1,3));
 fprintf(fid,'\t\t\t%10.6f, %10.6f, %10.6f,\n', rmat(2,1), rmat(2,2), rmat(2,3));
 fprintf(fid,'\t\t\t%10.6f, %10.6f, %10.6f,\n', rmat(3,1), rmat(3,2), rmat(3,3));
-% fprintf(fid,'\t\tmatrix <%10.6f, %10.6f, %10.6f,\n', rmat(1,1), rmat(1,3), rmat(1,2));
-% fprintf(fid,'\t\t\t%10.6f, %10.6f, %10.6f,\n', rmat(2,1), rmat(2,3), rmat(2,2));
-% fprintf(fid,'\t\t\t%10.6f, %10.6f, %10.6f,\n', rmat(3,1), rmat(3,3), rmat(3,2));
 fprintf(fid,'\t\t\t%10.6f, %10.6f, %10.6f>\n', center(1), center(3), center(2));
 
 if isfield(povray_options, 'Texture')

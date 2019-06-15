@@ -1,4 +1,14 @@
 function drawAsSphere(fid, pp)
+% drawAsSphere(fid, pp)
+%
+% Approximate a patch or surface object as a sphere. Determine the relevant
+% parameters (center and radius) and write the resulting shape to file using the Povray scripting language. 
+%
+% Input:
+%   - fid: File identifier
+%   - pp: graphics object (path or surface)
+%
+% Author: Sigurd Schelstraete, 2019
 
 % Fit sphere to the data
 if isequal(pp.Type ,'surface')
@@ -7,7 +17,10 @@ elseif isequal(pp.Type ,'patch')
     all_verts = pp.Faces(:);
     all_verts(isnan(all_verts)) = [];
     vertices = pp.Vertices(all_verts,:);
+else
+    error('Object type not supported')
 end
+
 if isequal(pp.Parent.Type, 'hgtransform')
     ht = pp.Parent;
     vertices = vertices*ht.Matrix(1:3,:)';
