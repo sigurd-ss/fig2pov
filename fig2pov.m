@@ -92,7 +92,7 @@ for kk=1:numel(light_obj)
         povray_options = struct();
     end
     
-    if isfield(povray_options,'ShadowLess') && ~povray_options.ShadowLess
+    if isfield(povray_options,'Shadowless') && ~povray_options.Shadowless
         shadow_txt = '';
     else
         shadow_txt = 'shadowless';
