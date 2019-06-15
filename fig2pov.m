@@ -271,10 +271,14 @@ for i_p = 1:numel(patch_obj)
 
         vert_radius = pp.MarkerSize  * line_basewidth;
         
-        if isequal(pp.MarkerEdgeColor, 'auto')
+        if ~isequal(pp.MarkerFaceColor, 'none') && ~isequal(pp.MarkerFaceColor, 'auto')
+            vert_col = pp.MarkerFaceColor;
+        elseif isequal(pp.MarkerFaceColor, 'auto')
+            vert_col = pp.MarkerFaceColor;
+        elseif isequal(pp.MarkerEdgeColor, 'auto')
             vert_col = pp.EdgeColor;
         else
-            vert_col = pp.MarkerFaceColor;
+            vert_col = pp.MarkerEdgeColor;
         end
         
         verts = get(pp, 'Vertices');

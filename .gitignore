@@ -78,7 +78,6 @@ polyhedron_cage2.m
 polyhedron_cantellate.m
 polyhedron_center.m
 polyhedron_dual.m
-polyhedron_edges.m
 polyhedron_expand.m
 polyhedron_net.m
 polyhedron_radius.m
@@ -139,3 +138,4 @@ zoom_test_1p5.png
 line.png
 logo.m
 matlab_logo.png
+test.png
