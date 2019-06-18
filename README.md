@@ -1,15 +1,15 @@
 <p align="center"> <img src="./Figures/matlab_logo.png" width="400"> </p>
 
-# fig2pov: Convert MATLAB figure to Povray script
+# fig2pov: Convert MATLAB figure to POV-Ray
 ## Summary
-Convert MATLAB figures to ray-traced images using Povray as the rendering engine. If desired, add texture and other rendering elements not supported by MATLAB to your graphics objects.
+Convert MATLAB figures to ray-traced images using POV-Ray as the rendering engine. If desired, add texture and other rendering elements not supported by MATLAB to your graphics objects.
 
 ## Introduction
-MATLAB graphics uses openGL or Painters for rendering figures. The quality of the rendering is not as good as what can be provided by e.g ray tracing. Povray is a popular open-source ray tracing program with its own scripting language for describing scenes.
-This function provides a simple way to convert MATLAB figures (or, to be exact, axes) to images rendered using ray tracing. It does so by generating a povray script based on the contents of the axes object. This script can then be executed in Povray to generate the final image.
+MATLAB graphics uses openGL or Painters for rendering figures. The quality of the rendering is not as good as what can be provided by e.g ray tracing. POV-Ray is a popular open-source ray tracing program with its own scripting language for describing scenes.
+This function provides a simple way to convert MATLAB figures (or, to be exact, axes) to images rendered using ray tracing. It does so by generating a POV-Ray script based on the contents of the axes object. This script can then be executed in POV-Ray to generate the final image.
 
 ## Usage
-After you've generated an axes object with all the graphics elements you want, this figure can be converted to a Povray script by simply calling:
+After you've generated an axes object with all the graphics elements you want, this figure can be converted to a POV-Ray script by simply calling:
 ```
 fig2pov(h_axes, script_name)
 ```
@@ -19,7 +19,7 @@ With:
 
 If no arguments are provided, the default values are _h\_axes_ = gca and _script\_name_ = 'fig.pov'.
 
-To see the rendered version, you will have to execute this script in Povray. The program is free and can be downloaded here: 
+To see the rendered version, you will have to execute this script in POV-Ray. The program is free and can be downloaded here: 
 https://www.povray.org/download/
 
 
@@ -37,11 +37,11 @@ The code above will result in the following figure:
 
 <p align="center"> <img src="./Figures/cube.png" width="500"> </p>
 
-Next, call fig2pov to convert this figure into a Povray script: 
+Next, call fig2pov to convert this figure into a POV-Ray script: 
 ```
 fig2pov(gca, 'cube.pov')
 ```
-The working directory will now contain a file called 'cube.pov', which is a file in the Povray scripting language. The \*.pov format is readable and can be edited in any text editor. To render the image, the script has to be executed by Povray. Make sure Povray is installed and call it from either the command line or using the GUI version. 
+The working directory will now contain a file called 'cube.pov', which is a file in the POV-Ray scripting language. The \*.pov format is readable and can be edited in any text editor. To render the image, the script has to be executed by POV-Ray. Make sure POV-Ray is installed and call it from either the command line or using the GUI version. 
 ```
 povray cube.pov
 ```
