@@ -64,8 +64,8 @@ See [here](./Documents) for available textures.
 Each graphics object can have its own 'UserData.povray' structure:
 ```
 cube.UserData.povray.Texture = 'T_Wood1';
-h_axes.UserData.povray.Plane = [0 0 1 -5];
-h_axes.UserData.povray.PlaneColor = 'checker color Black, color White';
+h_axes.UserData.povray.Plane.Normal = [0 0 1 -5];
+h_axes.UserData.povray.Plane.Color = 'checker color Black, color White';
 ``` 
 This gives:
 
@@ -85,18 +85,30 @@ for i=1:5
     rand_pos = randi([-2 2], 1, 3);
     rand_scale = 0.5*rand + 1;
     h_sphere(i)=surf(rand_scale*x+rand_pos(1),rand_scale*y+rand_pos(2),rand_scale*z+rand_pos(3));
-    h_sphere(i).UserData.povray.drawAsSphere = true;
-    h_sphere(i).UserData.povray.Texture = sprintf('T_Stone%d', randi([1,44],1,1));
 end
 view(3)
 axis equal
 h_axes = gca;
-h_axes.UserData.povray.Plane = [0 0 1 -4];
+h_light = camlight('right')
+
+% Set spheres povray options
+for i=1:5
+    h_sphere(i).UserData.povray.drawAsSphere = true;
+    h_sphere(i).UserData.povray.Texture = sprintf('T_Stone%d', randi([1,44],1,1));
+end
+
+% Set light povray options
+h_light.UserData.povray.Shadowless = false;
+
+% Set axes povray options
+h_axes.UserData.povray.Plane.Normal = [0 0 1 -1];
+h_axes.UserData.povray.Plane.Texture = 'Starfield';
+h_axes.UserData.povray.Plane.TextureScale = 100;
 ```
 
-This gives the following figure after rendering in Povray:
-
-<p align="center"> <img src="./Figures/multiple.png" width="700"> </p>
+This gives the following figures in MATLAB and POV-Ray respectively:
+<p align="center"> <img src="./Figures/spheres_ml1.png" width="600"> </p>
+<p align="center"> <img src="./Figures/spheres_pv1.png" width="600"> </p>
 
 ## Note
 These functions were initially written to facilitate the generation of pictures of polyhedra (using mostly patch objects). Since then, I've tried to include other types of graphics objects as well. Let me know if something is missing or if you find bugs.
