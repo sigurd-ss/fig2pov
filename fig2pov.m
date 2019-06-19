@@ -110,28 +110,31 @@ end
 
 % Background and Plane
 if isfield(axes_povray_options,'Plane')
-    fprintf(fid,'plane {\n\t<%.2f, %.2f, %.2f>, %.2f \n', ...
-        axes_povray_options.Plane(1), axes_povray_options.Plane(3), axes_povray_options.Plane(2), axes_povray_options.Plane(4));
-    if isfield(axes_povray_options,'PlaneColor')
-        if isnumeric(axes_povray_options.PlaneColor) && numel(axes_povray_options.PlaneColor)==3
-            fprintf(fid, '\tpigment {color rgb<%.2f, %.2f, %.2f>}\n', ...
-                axes_povray_options.PlaneColor(1), axes_povray_options.PlaneColor(2), axes_povray_options.PlaneColor(3));
+    num_planes = numel(axes_povray_options.Plane);
+    for i_p=1:num_planes
+        plane_options = axes_povray_options.Plane(i_p);
+        fprintf(fid,'plane {\n\t<%.2f, %.2f, %.2f>, %.2f \n', ...
+            plane_options.Normal(1), plane_options.Normal(3), plane_options.Normal(2), plane_options.Normal(4));
+        if isfield(plane_options,'Color')
+            if isnumeric(plane_options.Color) && numel(plane_options.Color)==3
+                fprintf(fid, '\tpigment {color rgb<%.2f, %.2f, %.2f>}\n', ...
+                    plane_options.Color(1), plane_options.Color(2), plane_options.Color(3));
+            else
+                fprintf(fid, '\tpigment {%s}\n', plane_options.Color);
+            end
         else
-            fprintf(fid, '\tpigment {%s}\n', axes_povray_options.PlaneColor);
+            fprintf(fid, '\tpigment {%s}\n', 'checker color Black, color White');
         end
-    else
-        fprintf(fid, '\tpigment {%s}\n', 'checker color Black, color White');
+        if isfield(plane_options,'Texture')
+            fprintf(fid, '\ttexture { %s }\n', ...
+                plane_options.Texture);
+        end
+        if isfield(plane_options,'TextureScale')
+            fprintf(fid, '\tscale %d\n', ...
+                plane_options.TextureScale);
+        end        
+        fprintf(fid,'}\n\n');
     end
-    if isfield(axes_povray_options,'PlaneTexture')
-        fprintf(fid, '\ttexture { %s }\n', ...
-            axes_povray_options.PlaneTexture);
-    end
-    if isfield(axes_povray_options,'PlaneTextureScale')
-        fprintf(fid, '\tscale %d\n', ...
-            axes_povray_options.PlaneTextureScale);
-    end
-    
-    fprintf(fid,'}\n\n');
 else
     fprintf(fid,'background { color rgb<%.4f, %.4f, %.4f> }\n\n', ...
         hax.Color(1), hax.Color(2), hax.Color(3));
