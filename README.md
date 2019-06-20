@@ -65,7 +65,6 @@ Each graphics object can have its own 'UserData.povray' structure:
 ```
 cube.UserData.povray.Texture = 'T_Wood1';
 h_axes.UserData.povray.Plane.Normal = [0 0 1 -5];
-h_axes.UserData.povray.Plane.Color = 'checker color Black, color White';
 ``` 
 This gives:
 
@@ -89,7 +88,7 @@ end
 view(3)
 axis equal
 h_axes = gca;
-h_light = camlight('right')
+h_light = camlight('right');
 
 % Set spheres povray options
 for i=1:5
