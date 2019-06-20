@@ -65,7 +65,6 @@ Each graphics object can have its own 'UserData.povray' structure:
 ```
 cube.UserData.povray.Texture = 'T_Wood1';
 h_axes.UserData.povray.Plane.Normal = [0 0 1 -5];
-h_axes.UserData.povray.Plane.Color = 'checker color Black, color White';
 ``` 
 This gives:
 
