@@ -88,7 +88,7 @@ end
 view(3)
 axis equal
 h_axes = gca;
-h_light = camlight('right')
+h_light = camlight('right');
 
 % Set spheres povray options
 for i=1:5
